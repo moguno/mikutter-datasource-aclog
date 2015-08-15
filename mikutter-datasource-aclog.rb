@@ -18,7 +18,10 @@ Plugin.create(:"mikutter-datasource-aclog") {
 
     if true || count >= UserConfig[:retrieve_interval_search]
       counters[service] = gen_counter
-      refresh(service.user_obj)
+
+      Thread.new {
+        refresh(service.user_obj)
+      }
     end
   }
 
